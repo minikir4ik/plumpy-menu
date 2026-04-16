@@ -17,7 +17,7 @@ export default function CategoryTabs({
   const containerRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef<HTMLButtonElement>(null);
 
-  // Scroll active tab into view when it changes
+  // Scroll active tab into center view when it changes
   useEffect(() => {
     if (activeRef.current && containerRef.current) {
       const container = containerRef.current;
@@ -34,7 +34,6 @@ export default function CategoryTabs({
     onSelect(id);
     const el = document.getElementById(`section-${id}`);
     if (el) {
-      // Offset for sticky header (~110px)
       const y = el.getBoundingClientRect().top + window.scrollY - 110;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
@@ -60,7 +59,9 @@ export default function CategoryTabs({
               background: isActive ? "#C5D14A" : "#F4F0E8",
               color: isActive ? "#4A5A18" : "#6B5D52",
               transform: isActive ? "scale(1.03)" : "scale(1)",
-              boxShadow: isActive ? "0 1px 4px rgba(197,209,74,0.3)" : "none",
+              boxShadow: isActive
+                ? "0 2px 8px rgba(197,209,74,0.4)"
+                : "none",
             }}
             aria-current={isActive ? "true" : undefined}
           >

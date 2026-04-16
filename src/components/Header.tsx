@@ -21,7 +21,8 @@ export default function Header() {
       ].join(" ")}
       style={{
         padding: scrolled ? "10px 0" : "16px 0",
-        transition: "padding 200ms cubic-bezier(0.4,0,0.2,1), background 200ms cubic-bezier(0.4,0,0.2,1)",
+        transition:
+          "padding 200ms cubic-bezier(0.4,0,0.2,1), background 200ms cubic-bezier(0.4,0,0.2,1)",
       }}
     >
       <div className="max-w-[430px] mx-auto px-4 flex items-center justify-center">
@@ -40,6 +41,19 @@ export default function Header() {
             style={{ fontSize: scrolled ? "8px" : "10px" }}
           >
             RESTAURANT
+          </div>
+          <div
+            className="font-display italic text-[#7D7268] transition-all duration-300 overflow-hidden"
+            style={{
+              fontSize: "11px",
+              opacity: scrolled ? 0 : 1,
+              maxHeight: scrolled ? 0 : "24px",
+              marginTop: scrolled ? 0 : "2px",
+              transition:
+                "opacity 200ms cubic-bezier(0.4,0,0.2,1), max-height 200ms cubic-bezier(0.4,0,0.2,1), margin-top 200ms cubic-bezier(0.4,0,0.2,1)",
+            }}
+          >
+            Comfort food for everyday delivery
           </div>
         </div>
       </div>

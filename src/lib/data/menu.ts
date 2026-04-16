@@ -13,7 +13,7 @@ export interface Dish {
   weight?: number;
   weightUnit?: 'g' | 'ml';
   weightDisplay?: string;
-  imageUrl?: string; // TODO: fetch from Tipz CDN at https://app.tipz.ae/qr/plumpymenu/
+  imageUrl?: string;
   tags: Tag[];
 }
 
@@ -1671,7 +1671,7 @@ export const MENU: Dish[] = [
   {
     id: 'herbal-mountain-tea',
     name: 'Herbal Mountain Tea',
-    description: 'Herbal mountain tea from Krasnaya Polyana — sage, melissa, mint, mountain ash, meadowsweet, barberry, rosehip, sea buckthorn.',
+    description: 'Herbal mountain tea from Krasnaya Polyana \u2014 sage, melissa, mint, mountain ash, meadowsweet, barberry, rosehip, sea buckthorn.',
     price: 23,
     category: 'loose-leaf-tea',
     weight: 354,
@@ -1792,7 +1792,7 @@ export function getDishesForCategory(categoryId: string): Dish[] {
   return MENU.filter((d) => d.category === categoryId);
 }
 
-/** Maps plumpy-menu dish IDs to local image paths (copied from plumpy-delivery CDN assets). */
+/** Maps plumpy-menu dish IDs to local image paths. */
 const DISH_IMAGE_MAP: Record<string, string> = {
   // ALL DAY BREAKFAST
   'zucchini-draniki-salmon': '/dishes/zucchini-draniki-salmon.webp',
@@ -1800,6 +1800,7 @@ const DISH_IMAGE_MAP: Record<string, string> = {
   'cottage-cheese-pancakes': '/dishes/syrniki.webp',
   'buckwheat-parmesan-poached': '/dishes/buckwheat-parmesan-egg.webp',
   'crispy-potato-salmon-egg': '/dishes/crispy-potato-salmon-dranik.webp',
+  'italian-sandwich': '/dishes/breakfast-sandwich.webp',
   'city-breakfast': '/dishes/city-breakfast.webp',
   'signature-breakfast-burrito': '/dishes/signature-breakfast-burrito.webp',
   'green-buckwheat-bowl': '/dishes/green-buckwheat-bowl-salmon.webp',
@@ -1809,38 +1810,78 @@ const DISH_IMAGE_MAP: Record<string, string> = {
   'scramble-king-crab': '/dishes/scramble-king-crab.webp',
   'millet-porridge': '/dishes/millet-porridge.webp',
   // STARTERS
+  'baby-zucchini-chicken-parmesan': '/dishes/green-salad.webp',
+  'salmon-tartare': '/dishes/salmon-steak.webp',
+  'burned-ramiro-peppers': '/dishes/farm-salad.webp',
+  'chicken-pate-berry': '/dishes/bread-whipped-butter.webp',
   'black-caviar-set': '/dishes/black-caviar-set.webp',
   'red-caviar-set': '/dishes/red-caviar-set.webp',
   'royal-toast-red-caviar': '/dishes/royal-toast-red-caviar.webp',
+  'hummus-spicy-chickpeas': '/dishes/bread-whipped-butter.webp',
   // SALADS
+  'russian-salad-crab': '/dishes/salad-king-crab.webp',
+  'russian-salad-chicken': '/dishes/farm-salad.webp',
   'greek-salad': '/dishes/greek-salad.webp',
   'salad-king-crab': '/dishes/salad-king-crab.webp',
+  'caesar-salad-chicken': '/dishes/green-salad.webp',
   'tomato-mango-stracciatella': '/dishes/tomato-mango-stracciatella.webp',
   'green-salad-vegetables': '/dishes/green-salad.webp',
+  'vegetable-salad': '/dishes/farm-salad.webp',
+  'shrimp-tomatoes-celery': '/dishes/salad-king-crab.webp',
   // SOUPS
   'chicken-soup': '/dishes/chicken-soup.webp',
+  'gazpacho': '/dishes/tomato-mango-stracciatella.webp',
   'mushroom-soup': '/dishes/mushroom-soup.webp',
   // MAIN COURSE
   'street-chicken-wrap': '/dishes/street-chicken-wrap.webp',
+  'crab-wrap': '/dishes/street-chicken-wrap.webp',
+  'truffle-burger': '/dishes/kids-burger.webp',
+  'sea-bass-mashed-potato': '/dishes/salmon-steak.webp',
   'buckwheat-paella-prawns': '/dishes/buckwheat-paella.webp',
+  'orzo-shrimps': '/dishes/spaghetti-carabineros.webp',
+  'rice-shrimps': '/dishes/buckwheat-paella.webp',
   'salmon-buckwheat-noodles': '/dishes/salmon-steak.webp',
+  'cheeseburger': '/dishes/kids-burger.webp',
   'rice-bowl-picanha': '/dishes/picanha-steak.webp',
   'casarecce-mushrooms': '/dishes/casarecce-mushrooms.webp',
   // KIDS MENU
+  'kids-seabass-potato': '/dishes/kids-rice-salmon.webp',
   'nuggets': '/dishes/nuggets.webp',
   'kids-mashed-potato-chicken': '/dishes/kids-mashed-potato-patty.webp',
+  'kids-penne-chicken-sausage': '/dishes/kids-spaghetti.webp',
   'kids-salmon-rice-tzatziki': '/dishes/kids-rice-salmon.webp',
+  'vegetable-sticks-kids': '/dishes/green-salad.webp',
   'kids-moms-spaghetti': '/dishes/kids-spaghetti.webp',
   'burger-chicken-sweet-potato': '/dishes/kids-burger.webp',
+  'kids-rice-porridge': '/dishes/rice-coconut-porridge.webp',
   'cacao': '/dishes/cocoa.webp',
   // DESSERTS
   'san-sebastian-mini': '/dishes/san-sebastian-cheesecake.webp',
   'madeleine': '/dishes/madelein.webp',
   'honey-cake-raspberry': '/dishes/mirage-honey-cake.webp',
+  // SWEET TOPPINGS
+  'plumpy-box-6': '/dishes/madelein.webp',
+  'plumpini-9': '/dishes/madelein.webp',
+  'plumpy-box-3': '/dishes/madelein.webp',
+  'plumpy-classic': '/dishes/madelein.webp',
+  // SAVOURY TOPPINGS
+  'red-caviar-30g': '/dishes/red-caviar-set.webp',
+  'salmon-50g': '/dishes/salmon-steak.webp',
+  'avocado-slices': '/dishes/avocado-toast.webp',
+  'avocado-salsa': '/dishes/avocado-toast.webp',
+  'king-crab-30g': '/dishes/salad-king-crab.webp',
+  'stracciatella-50g': '/dishes/tomato-mango-stracciatella.webp',
+  'black-caviar-10g': '/dishes/black-caviar-set.webp',
+  'shrimps-50g': '/dishes/spaghetti-carabineros.webp',
   // SIDE DISHES
   'blini-crepes': '/dishes/blin-pancake.webp',
+  'grilled-veggies': '/dishes/green-salad.webp',
+  'broccoli': '/dishes/green-salad.webp',
   'boiled-chicken-egg': '/dishes/eggs-any-style.webp',
+  'mashed-potatoes': '/dishes/kids-mashed-potato-patty.webp',
+  'mix-salad': '/dishes/farm-salad.webp',
   'chicken-eggs': '/dishes/eggs-any-style.webp',
+  'rice-vegetables': '/dishes/buckwheat-paella.webp',
   // LEMONADES
   'mango-passionfruit': '/dishes/mango-passionfruit.webp',
   'strawberry-yuzu': '/dishes/strawberry-yuzu-elderflower.webp',
@@ -1849,6 +1890,9 @@ const DISH_IMAGE_MAP: Record<string, string> = {
   'iced-peach-tea': '/dishes/iced-peach-tea.webp',
   'tropical-dragon': '/dishes/tropical-dragon.webp',
   // SMOOTHIES
+  'acai-smoothie': '/dishes/ginger-beetroot-smoothie.webp',
+  'strawberry-raspberry-smoothie': '/dishes/ginger-beetroot-smoothie.webp',
+  'fresh-tropical-smoothie': '/dishes/mango-passionfruit.webp',
   'beetroot-smoothie': '/dishes/ginger-beetroot-smoothie.webp',
   // ESPRESSO BASED
   'plumpy-drip-bag-coffee': '/dishes/plumpy-drip-coffee.webp',
@@ -1856,6 +1900,7 @@ const DISH_IMAGE_MAP: Record<string, string> = {
   'spanish-latte-hot': '/dishes/spanish-latte.webp',
   'cappuccino-hot': '/dishes/cappuccino.webp',
   'iced-latte': '/dishes/latte.webp',
+  'hand-brew-hot': '/dishes/v60.webp',
   'americano': '/dishes/americano.webp',
   'cappuccino-hot-220': '/dishes/cappuccino.webp',
   'flat-white-hot': '/dishes/flat-white.webp',
@@ -1866,6 +1911,7 @@ const DISH_IMAGE_MAP: Record<string, string> = {
   'iced-flat-white': '/dishes/flat-white.webp',
   'iced-raf': '/dishes/raf-hot.webp',
   'iced-spanish-latte': '/dishes/spanish-latte.webp',
+  'iced-hand-brew': '/dishes/v60.webp',
   // MATCHA
   'iced-matcha-latte': '/dishes/matcha-iced.webp',
   'matcha-latte-hot': '/dishes/matcha-hot.webp',
@@ -1880,6 +1926,8 @@ const DISH_IMAGE_MAP: Record<string, string> = {
   'red-tea': '/dishes/black-tea.webp',
   // JUICES
   'orange-juice': '/dishes/orange-juice.webp',
+  'carrot-juice': '/dishes/orange-juice.webp',
+  'apple-juice': '/dishes/orange-juice.webp',
   // SOFT DRINKS
   'coca-cola': '/dishes/coca-cola.webp',
   'coca-cola-zero': '/dishes/coca-cola-zero.webp',
@@ -1890,6 +1938,58 @@ const DISH_IMAGE_MAP: Record<string, string> = {
 
 export function getDishImageUrl(dishId: string): string | undefined {
   return DISH_IMAGE_MAP[dishId];
+}
+
+export function getDietaryTags(description: string): Array<{ label: string; code: string }> {
+  const tags: Array<{ label: string; code: string }> = [];
+  const lower = description.toLowerCase();
+  if (lower.includes('gluten free')) tags.push({ label: 'Gluten Free', code: 'GF' });
+  if (lower.includes('dairy free')) tags.push({ label: 'Dairy Free', code: 'DF' });
+  if (lower.includes('vegan')) tags.push({ label: 'Vegan', code: 'VG' });
+  if (lower.includes('vegetarian')) tags.push({ label: 'Vegetarian', code: 'VT' });
+  return tags;
+}
+
+export function getAllergens(description: string, name: string): string[] {
+  const text = (description + ' ' + name).toLowerCase();
+  const found: string[] = [];
+  if (/milk|cream|cheese|butter|yogurt|mozzarella|parmesan|feta|stracciatella|labneh|crème/.test(text)) found.push('Dairy');
+  if (/bread|croissant|toast|pasta|tortilla|focaccia|spaghetti|penne|casarecce|orzo|croutons|blini|pancake|crepe|oat|wheat|dough/.test(text) && !text.includes('gluten free')) found.push('Gluten');
+  if (/\begg\b|eggs|poached egg|scramble/.test(text)) found.push('Eggs');
+  if (/peanut|hazelnut|almond|walnut|nuts/.test(text)) found.push('Nuts');
+  if (/salmon|sea bass|fish|caviar|tuna/.test(text)) found.push('Fish');
+  if (/shrimp|prawn|crab|lobster|calamari/.test(text)) found.push('Shellfish');
+  return [...new Set(found)];
+}
+
+const PAIR_CATEGORIES: Record<string, string[]> = {
+  'all-day-breakfast': ['espresso-based', 'juices'],
+  'starters': ['salads', 'soups'],
+  'salads': ['soups', 'main-course'],
+  'soups': ['starters', 'side-dishes'],
+  'main-course': ['salads', 'starters'],
+  'kids-menu': ['juices', 'smoothies'],
+  'desserts': ['espresso-based', 'matcha'],
+  'sweet-toppings': ['espresso-based', 'loose-leaf-tea'],
+  'savoury-toppings': ['all-day-breakfast', 'main-course'],
+  'side-dishes': ['main-course', 'soups'],
+  'lemonades': ['desserts', 'starters'],
+  'smoothies': ['all-day-breakfast', 'desserts'],
+  'espresso-based': ['desserts', 'all-day-breakfast'],
+  'matcha': ['desserts', 'all-day-breakfast'],
+  'tea-without-tea': ['desserts', 'sweet-toppings'],
+  'loose-leaf-tea': ['desserts', 'sweet-toppings'],
+  'juices': ['all-day-breakfast', 'salads'],
+  'soft-drinks': ['main-course', 'kids-menu'],
+  'water': ['main-course', 'salads'],
+};
+
+export function getSuggestedPairings(dish: Dish): Dish[] {
+  const targets = PAIR_CATEGORIES[dish.category] || ['desserts', 'espresso-based'];
+  const popular = MENU.filter(d => d.id !== dish.id && targets.includes(d.category) && d.tags.length > 0);
+  if (popular.length >= 2) return popular.slice(0, 2);
+  const all = MENU.filter(d => d.id !== dish.id && targets.includes(d.category));
+  return all.slice(0, 2);
 }
 
 export function getAllergenTags(description: string): string[] {

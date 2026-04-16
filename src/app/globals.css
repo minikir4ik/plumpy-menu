@@ -24,7 +24,7 @@
   --ease-snappy:   cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* ─── Base ───────────────────────────────────────────────────────────────────── */
+/* ─── Base Reset ────────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -43,11 +43,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Warm morning sunlight glow behind logo area */
-  background-image: radial-gradient(ellipse 300px 300px at 50% 0%, #FFF5E8 0%, transparent 60%);
-  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(ellipse 300px 300px at 50% 0%, #FFF5E8 0%, transparent 60%),
+    /* Subtle paper texture via faint repeating noise pattern */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(180, 160, 130, 0.015) 2px,
+      rgba(180, 160, 130, 0.015) 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(160, 140, 110, 0.012) 3px,
+      rgba(160, 140, 110, 0.012) 4px
+    );
+  background-repeat: no-repeat, repeat, repeat;
 }
 
-/* ─── Typography ─────────────────────────────────────────────────────────────── */
+/* ─── Typography ────────────────────────────────────────────────────────────── */
 .font-display {
   font-family: var(--font-display);
 }
@@ -56,7 +72,7 @@ body {
   font-family: var(--font-body);
 }
 
-/* ─── Animations ─────────────────────────────────────────────────────────────── */
+/* ─── Animations ────────────────────────────────────────────────────────────── */
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -72,6 +88,12 @@ body {
   to   { opacity: 1; transform: scaleY(1) translateY(0); }
 }
 
+@keyframes pillFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Animation Classes ─────────────────────────────────────────────────────── */
 .animate-fade-slide-up {
   animation: fadeSlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -81,11 +103,15 @@ body {
 }
 
 .dish-expand {
-  animation: expandDown 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: expandDown 250ms cubic-bezier(0.2, 0, 0, 1) both;
   transform-origin: top center;
 }
 
-/* Staggered children */
+.nutrition-pill-stagger {
+  animation: pillFadeIn 200ms ease-out both;
+}
+
+/* ─── Staggered Children ────────────────────────────────────────────────────── */
 .stagger-children > * {
   animation: fadeSlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -97,25 +123,32 @@ body {
 .stagger-children > *:nth-child(6) { animation-delay: 0.30s; }
 .stagger-children > *:nth-child(n+7) { animation-delay: 0.35s; }
 
-/* ─── Scrollbar ───────────────────────────────────────────────────────────────── */
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #EDE8DF; border-radius: 99px; }
 
-/* ─── Category tabs scroll ───────────────────────────────────────────────────── */
+/* ─── Category Tabs Scroll ──────────────────────────────────────────────────── */
 .tabs-scroll {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 .tabs-scroll::-webkit-scrollbar { display: none; }
 
-/* ─── Card press effect ───────────────────────────────────────────────────────── */
-.dish-card-press:active {
-  transform: scale(0.98);
-  transition: transform 100ms cubic-bezier(0.2, 0, 0, 1);
+/* ─── Card Effects ──────────────────────────────────────────────────────────── */
+.dish-card-press {
+  transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
-/* ─── Image gradient placeholder ─────────────────────────────────────────────── */
+.dish-card-press:active {
+  transform: scale(0.98);
+}
+
+.dish-card-press:hover {
+  box-shadow: 0 4px 20px rgba(120, 90, 50, 0.12);
+}
+
+/* ─── Image Gradient Placeholder ────────────────────────────────────────────── */
 .dish-img-placeholder {
   background: linear-gradient(135deg, #F0F3D8 0%, #E8EFC0 50%, #F4F0E8 100%);
   position: relative;
@@ -130,7 +163,7 @@ body {
   background-size: 200% 200%;
 }
 
-/* ─── Focus styles ────────────────────────────────────────────────────────────── */
+/* ─── Focus Styles ──────────────────────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid #C5D14A;
   outline-offset: 2px;
@@ -140,7 +173,7 @@ body {
   outline: none;
 }
 
-/* ─── Reduced motion ──────────────────────────────────────────────────────────── */
+/* ─── Reduced Motion ────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
