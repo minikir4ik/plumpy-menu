@@ -16,10 +16,13 @@ export default function Header() {
       className={[
         "sticky top-0 z-40 transition-all duration-300",
         scrolled
-          ? "bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#EDE8DF] py-2.5"
-          : "bg-transparent py-4",
+          ? "bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#EDE8DF]"
+          : "bg-transparent",
       ].join(" ")}
-      style={{ transition: "padding 200ms cubic-bezier(0.4,0,0.2,1), background 200ms cubic-bezier(0.4,0,0.2,1)" }}
+      style={{
+        padding: scrolled ? "10px 0" : "16px 0",
+        transition: "padding 200ms cubic-bezier(0.4,0,0.2,1), background 200ms cubic-bezier(0.4,0,0.2,1)",
+      }}
     >
       <div className="max-w-[430px] mx-auto px-4 flex items-center justify-center">
         <div className="text-center">

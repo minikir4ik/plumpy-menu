@@ -5,20 +5,6 @@ import { CATEGORIES, MENU, getDishesForCategory } from "@/lib/data/menu";
 import CategoryTabs from "./CategoryTabs";
 import DishCard from "./DishCard";
 
-const SEARCH_ICON = (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-    aria-hidden="true"
-    className="text-[#7D7268] flex-shrink-0"
-  >
-    <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M11 11L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
-);
-
 const SECTION_DOTS = (
   <div className="flex items-center gap-2 py-1 text-[#C5B9AC] text-xs select-none" aria-hidden="true">
     <span>·</span><span>·</span><span>·</span>
@@ -87,13 +73,26 @@ export default function MenuClient() {
         <div className="px-4 pt-3 pb-2.5 border-b border-[#EDE8DF]">
           <label htmlFor="menu-search" className="sr-only">Search dishes</label>
           <div
-            className="flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 transition-shadow duration-150"
+            className="flex items-center gap-2.5 transition-shadow duration-150"
             style={{
               background: "#F4F0E8",
+              borderRadius: 14,
+              padding: "12px 16px",
               boxShadow: search ? "0 0 0 2px #C5D14A" : "none",
             }}
           >
-            {SEARCH_ICON}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+              className="flex-shrink-0"
+              style={{ color: "#7D7268" }}
+            >
+              <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M11 11L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
             <input
               ref={searchRef}
               id="menu-search"
@@ -103,13 +102,15 @@ export default function MenuClient() {
               placeholder="Search dishes..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 bg-transparent font-body text-[14px] text-[#2A2218] placeholder-[#B0A898] outline-none"
+              className="flex-1 bg-transparent font-body text-[14px] text-[#2A2218] placeholder-[#7D7268] outline-none"
+              style={{ color: "#2A2218" }}
               aria-label="Search dishes"
             />
             {search && (
               <button
                 onClick={() => { setSearch(""); searchRef.current?.focus(); }}
-                className="text-[#7D7268] hover:text-[#2A2218] transition-colors p-0.5 rounded"
+                className="hover:text-[#2A2218] transition-colors p-0.5 rounded"
+                style={{ color: "#7D7268" }}
                 aria-label="Clear search"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -197,10 +198,16 @@ function FullMenu({
 
             <h2
               id={`heading-${cat.id}`}
-              className="font-display text-[20px] font-semibold text-[#2A2218] mb-4 mt-1"
-              style={{ letterSpacing: "-0.015em" }}
+              className="font-display font-semibold text-[#2A2218] mb-4 mt-1"
+              style={{ fontSize: "22px", letterSpacing: "-0.015em" }}
             >
-              {cat.name}
+              <span className="inline-flex items-center gap-2">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" className="flex-shrink-0" style={{ marginTop: -1 }}>
+                  <path d="M9 2C9 2 7 6 4 8C1 10 2 14 5 15C8 16 9 13 9 13C9 13 10 16 13 15C16 14 17 10 14 8C11 6 9 2 9 2Z" fill="#C5D14A" opacity="0.7"/>
+                  <path d="M9 4C9 4 8 7 6 9C4 11 5 13 7 13.5C8.5 14 9 12 9 12C9 12 9.5 14 11 13.5C13 13 14 11 12 9C10 7 9 4 9 4Z" fill="#4A5A18" opacity="0.3"/>
+                </svg>
+                {cat.name}
+              </span>
             </h2>
 
             <div className="flex flex-col gap-3 stagger-children">

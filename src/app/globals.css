@@ -42,9 +42,9 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Warm radial glow at top of page */
-  background-image: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(253, 235, 185, 0.45) 0%, transparent 70%);
-  background-attachment: fixed;
+  /* Warm morning sunlight glow behind logo area */
+  background-image: radial-gradient(ellipse 300px 300px at 50% 0%, #FFF5E8 0%, transparent 60%);
+  background-repeat: no-repeat;
 }
 
 /* ─── Typography ─────────────────────────────────────────────────────────────── */

@@ -54,10 +54,11 @@ export default function CategoryTabs({
             key={cat.id}
             ref={isActive ? activeRef : null}
             onClick={() => handleSelect(cat.id)}
-            className="flex-shrink-0 font-body font-medium whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] transition-all duration-200 cursor-pointer"
+            className="flex-shrink-0 font-body font-medium whitespace-nowrap rounded-full text-[13px] transition-all duration-200 cursor-pointer"
             style={{
-              background: isActive ? "#C5D14A" : "#F0EBE0",
-              color: isActive ? "#4A5A18" : "#7D7268",
+              padding: "8px 16px",
+              background: isActive ? "#C5D14A" : "#F4F0E8",
+              color: isActive ? "#4A5A18" : "#6B5D52",
               transform: isActive ? "scale(1.03)" : "scale(1)",
               boxShadow: isActive ? "0 1px 4px rgba(197,209,74,0.3)" : "none",
             }}

@@ -1792,6 +1792,106 @@ export function getDishesForCategory(categoryId: string): Dish[] {
   return MENU.filter((d) => d.category === categoryId);
 }
 
+/** Maps plumpy-menu dish IDs to local image paths (copied from plumpy-delivery CDN assets). */
+const DISH_IMAGE_MAP: Record<string, string> = {
+  // ALL DAY BREAKFAST
+  'zucchini-draniki-salmon': '/dishes/zucchini-draniki-salmon.webp',
+  'rice-milk-porridge': '/dishes/rice-coconut-porridge.webp',
+  'cottage-cheese-pancakes': '/dishes/syrniki.webp',
+  'buckwheat-parmesan-poached': '/dishes/buckwheat-parmesan-egg.webp',
+  'crispy-potato-salmon-egg': '/dishes/crispy-potato-salmon-dranik.webp',
+  'city-breakfast': '/dishes/city-breakfast.webp',
+  'signature-breakfast-burrito': '/dishes/signature-breakfast-burrito.webp',
+  'green-buckwheat-bowl': '/dishes/green-buckwheat-bowl-salmon.webp',
+  'granola-coconut-yogurt': '/dishes/granola-coconut-yogurt.webp',
+  'sweet-croissant': '/dishes/croissant-butter-jam.webp',
+  'oat-porridge-truffle-honey': '/dishes/oat-porridge-truffle-honey.webp',
+  'scramble-king-crab': '/dishes/scramble-king-crab.webp',
+  'millet-porridge': '/dishes/millet-porridge.webp',
+  // STARTERS
+  'black-caviar-set': '/dishes/black-caviar-set.webp',
+  'red-caviar-set': '/dishes/red-caviar-set.webp',
+  'royal-toast-red-caviar': '/dishes/royal-toast-red-caviar.webp',
+  // SALADS
+  'greek-salad': '/dishes/greek-salad.webp',
+  'salad-king-crab': '/dishes/salad-king-crab.webp',
+  'tomato-mango-stracciatella': '/dishes/tomato-mango-stracciatella.webp',
+  'green-salad-vegetables': '/dishes/green-salad.webp',
+  // SOUPS
+  'chicken-soup': '/dishes/chicken-soup.webp',
+  'mushroom-soup': '/dishes/mushroom-soup.webp',
+  // MAIN COURSE
+  'street-chicken-wrap': '/dishes/street-chicken-wrap.webp',
+  'buckwheat-paella-prawns': '/dishes/buckwheat-paella.webp',
+  'salmon-buckwheat-noodles': '/dishes/salmon-steak.webp',
+  'rice-bowl-picanha': '/dishes/picanha-steak.webp',
+  'casarecce-mushrooms': '/dishes/casarecce-mushrooms.webp',
+  // KIDS MENU
+  'nuggets': '/dishes/nuggets.webp',
+  'kids-mashed-potato-chicken': '/dishes/kids-mashed-potato-patty.webp',
+  'kids-salmon-rice-tzatziki': '/dishes/kids-rice-salmon.webp',
+  'kids-moms-spaghetti': '/dishes/kids-spaghetti.webp',
+  'burger-chicken-sweet-potato': '/dishes/kids-burger.webp',
+  'cacao': '/dishes/cocoa.webp',
+  // DESSERTS
+  'san-sebastian-mini': '/dishes/san-sebastian-cheesecake.webp',
+  'madeleine': '/dishes/madelein.webp',
+  'honey-cake-raspberry': '/dishes/mirage-honey-cake.webp',
+  // SIDE DISHES
+  'blini-crepes': '/dishes/blin-pancake.webp',
+  'boiled-chicken-egg': '/dishes/eggs-any-style.webp',
+  'chicken-eggs': '/dishes/eggs-any-style.webp',
+  // LEMONADES
+  'mango-passionfruit': '/dishes/mango-passionfruit.webp',
+  'strawberry-yuzu': '/dishes/strawberry-yuzu-elderflower.webp',
+  'virgin-hugo': '/dishes/virgin-hugo.webp',
+  'cream-soda': '/dishes/cream-soda.webp',
+  'iced-peach-tea': '/dishes/iced-peach-tea.webp',
+  'tropical-dragon': '/dishes/tropical-dragon.webp',
+  // SMOOTHIES
+  'beetroot-smoothie': '/dishes/ginger-beetroot-smoothie.webp',
+  // ESPRESSO BASED
+  'plumpy-drip-bag-coffee': '/dishes/plumpy-drip-coffee.webp',
+  'v60-colombia': '/dishes/v60.webp',
+  'spanish-latte-hot': '/dishes/spanish-latte.webp',
+  'cappuccino-hot': '/dishes/cappuccino.webp',
+  'iced-latte': '/dishes/latte.webp',
+  'americano': '/dishes/americano.webp',
+  'cappuccino-hot-220': '/dishes/cappuccino.webp',
+  'flat-white-hot': '/dishes/flat-white.webp',
+  'latte-hot': '/dishes/latte.webp',
+  'raf-hot': '/dishes/raf-hot.webp',
+  'raf-chicory': '/dishes/raf-hot.webp',
+  'raf-chicory-coconut': '/dishes/raf-hot.webp',
+  'iced-flat-white': '/dishes/flat-white.webp',
+  'iced-raf': '/dishes/raf-hot.webp',
+  'iced-spanish-latte': '/dishes/spanish-latte.webp',
+  // MATCHA
+  'iced-matcha-latte': '/dishes/matcha-iced.webp',
+  'matcha-latte-hot': '/dishes/matcha-hot.webp',
+  'matcha-banana': '/dishes/iced-matcha-banana.webp',
+  // TEA WITHOUT TEA
+  'sea-buckthorn-tea': '/dishes/sea-buckthorn-tea.webp',
+  'ginger-lemongrass-tea': '/dishes/ginger-lemongrass-tea.webp',
+  'mango-ginger-tea': '/dishes/mango-ginger-pineapple-tea.webp',
+  // LOOSE LEAF TEA
+  'herbal-mountain-tea': '/dishes/herbal-mountain-tea.webp',
+  'green-tea': '/dishes/green-tea.webp',
+  'red-tea': '/dishes/black-tea.webp',
+  // JUICES
+  'orange-juice': '/dishes/orange-juice.webp',
+  // SOFT DRINKS
+  'coca-cola': '/dishes/coca-cola.webp',
+  'coca-cola-zero': '/dishes/coca-cola-zero.webp',
+  // WATER
+  'acqua-panna': '/dishes/acqua-panna.webp',
+  'san-pellegrino': '/dishes/san-pellegrino.webp',
+};
+
+export function getDishImageUrl(dishId: string): string | undefined {
+  return DISH_IMAGE_MAP[dishId];
+}
+
 export function getAllergenTags(description: string): string[] {
   const tags: string[] = [];
   const lower = description.toLowerCase();

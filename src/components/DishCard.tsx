@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Dish } from "@/lib/data/menu";
-import { getAllergenTags } from "@/lib/data/menu";
+import { getAllergenTags, getDishImageUrl } from "@/lib/data/menu";
 
 interface DishCardProps {
   dish: Dish;
@@ -10,48 +10,75 @@ interface DishCardProps {
 
 function NutritionPill({ value, unit, label }: { value: number; unit: string; label: string }) {
   return (
-    <div className="flex-1 flex flex-col items-center gap-0.5 bg-[#F0F3D8] border border-[#DDE5A8] rounded-xl py-2 px-1.5">
-      <span className="font-body text-[14px] font-semibold text-[#2A2218] leading-none">
+    <div
+      className="flex-1 flex flex-col items-center gap-1 rounded-[10px]"
+      style={{ background: "#F0F3D8", padding: "8px 12px" }}
+    >
+      <span className="font-body text-[14px] font-bold leading-none" style={{ color: "#4A5A18" }}>
         {Number.isInteger(value) ? value : value.toFixed(1)}
-        <span className="text-[11px] font-normal text-[#7D7268]">{unit}</span>
+        {unit && <span className="text-[11px] font-normal" style={{ color: "#4A5A18" }}>{unit}</span>}
       </span>
-      <span className="font-body text-[9px] uppercase tracking-wider text-[#7D7268] leading-none">
+      <span
+        className="font-body text-[10px] uppercase leading-none"
+        style={{ color: "#7D7268", letterSpacing: "0.08em", fontWeight: 500 }}
+      >
         {label}
       </span>
     </div>
   );
 }
 
-function CategoryGradient({ category }: { category: string }) {
+function DishImage({ dish }: { dish: Dish }) {
+  const imageUrl = getDishImageUrl(dish.id);
+
   const gradients: Record<string, string> = {
-    "all-day-breakfast": "linear-gradient(135deg, #F0F3D8 0%, #E8EFC0 60%, #FFF8E6 100%)",
-    starters: "linear-gradient(135deg, #F0EEF3 0%, #E5E0F0 60%, #F3F0E8 100%)",
-    salads: "linear-gradient(135deg, #E8F3D8 0%, #D8ECC0 60%, #F0F3D8 100%)",
-    soups: "linear-gradient(135deg, #F3EDD8 0%, #EDE0C0 60%, #F8F3E8 100%)",
-    "main-course": "linear-gradient(135deg, #F3E8D8 0%, #EDD8C0 60%, #F8EEE8 100%)",
-    "kids-menu": "linear-gradient(135deg, #F8F3D8 0%, #F0EAC0 60%, #FFF8E8 100%)",
-    desserts: "linear-gradient(135deg, #F3D8E8 0%, #ECC0D8 60%, #F8E8EE 100%)",
-    "sweet-toppings": "linear-gradient(135deg, #F3EDD8 0%, #EDE0BE 60%, #F8F3E0 100%)",
-    "savoury-toppings": "linear-gradient(135deg, #E8F0D8 0%, #D8E8C0 60%, #F0F3D8 100%)",
-    "side-dishes": "linear-gradient(135deg, #EEF3D8 0%, #E4ECC0 60%, #F3F3E8 100%)",
-    lemonades: "linear-gradient(135deg, #F3F0D8 0%, #EDE8C0 60%, #FFFAE8 100%)",
-    smoothies: "linear-gradient(135deg, #D8F0F3 0%, #C0E4EC 60%, #E8F8F3 100%)",
-    "espresso-based": "linear-gradient(135deg, #E8D8C8 0%, #D8C4B0 60%, #F0E8D8 100%)",
-    matcha: "linear-gradient(135deg, #D8F0D8 0%, #C8E8C0 60%, #EEF8E8 100%)",
-    "tea-without-tea": "linear-gradient(135deg, #F3EDD8 0%, #E8E0C0 60%, #F8F0E0 100%)",
-    "loose-leaf-tea": "linear-gradient(135deg, #E8F3E8 0%, #D8ECD8 60%, #F0F8F0 100%)",
-    juices: "linear-gradient(135deg, #F8F0D8 0%, #F0E4C0 60%, #FFF8E8 100%)",
-    "soft-drinks": "linear-gradient(135deg, #F3D8D8 0%, #ECC8C8 60%, #F8E8E8 100%)",
-    water: "linear-gradient(135deg, #D8EEF3 0%, #C8E4EC 60%, #E8F4F8 100%)",
+    "all-day-breakfast": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    starters: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    salads: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    soups: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "main-course": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "kids-menu": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    desserts: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "sweet-toppings": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "savoury-toppings": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "side-dishes": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    lemonades: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    smoothies: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "espresso-based": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    matcha: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "tea-without-tea": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "loose-leaf-tea": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    juices: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    "soft-drinks": "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
+    water: "linear-gradient(135deg, #F0F3D8 0%, #E8EDD0 100%)",
   };
 
   return (
     <div
-      className="w-20 h-20 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden"
-      style={{ background: gradients[category] || gradients["all-day-breakfast"] }}
+      className="flex-shrink-0 overflow-hidden"
+      style={{
+        width: 80,
+        height: 80,
+        borderRadius: 12,
+        background: gradients[dish.category] || gradients["all-day-breakfast"],
+      }}
       aria-hidden="true"
     >
-      <div className="w-10 h-10 rounded-full opacity-20" style={{ background: "rgba(197,209,74,0.6)" }} />
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt=""
+          width={80}
+          height={80}
+          loading="lazy"
+          decoding="async"
+          style={{ width: 80, height: 80, objectFit: "cover", display: "block" }}
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full opacity-20" style={{ background: "rgba(197,209,74,0.6)" }} />
+        </div>
+      )}
     </div>
   );
 }
@@ -66,9 +93,11 @@ export default function DishCard({ dish }: DishCardProps) {
 
   return (
     <article
-      className="dish-card-press bg-white rounded-2xl overflow-hidden cursor-pointer select-none"
+      className="dish-card-press overflow-hidden cursor-pointer select-none"
       style={{
-        boxShadow: "0 2px 12px rgba(120,90,50,0.07), 0 1px 3px rgba(120,90,50,0.05)",
+        background: "#FFFFFF",
+        borderRadius: 16,
+        boxShadow: "0 2px 12px rgba(120, 90, 50, 0.08)",
         border: "1px solid #EDE8DF",
       }}
       onClick={() => setExpanded((v) => !v)}
@@ -85,7 +114,7 @@ export default function DishCard({ dish }: DishCardProps) {
       {/* Collapsed row */}
       <div className="flex items-start gap-3 p-3">
         {/* Image */}
-        <CategoryGradient category={dish.category} />
+        <DishImage dish={dish} />
 
         {/* Info */}
         <div className="flex-1 min-w-0 pt-0.5">
@@ -124,7 +153,7 @@ export default function DishCard({ dish }: DishCardProps) {
               <span className="text-[13px] font-normal text-[#7D7268] ml-0.5 opacity-60">AED</span>
             </span>
             {weightStr && !expanded && (
-              <span className="font-body text-[12px] text-[#7D7268]">· {weightStr}</span>
+              <span className="font-body text-[12px] text-[#7D7268]">&middot; {weightStr}</span>
             )}
           </div>
         </div>
@@ -156,8 +185,8 @@ export default function DishCard({ dish }: DishCardProps) {
 
           {/* Weight */}
           {weightStr && (
-            <p className="font-body text-[12px] text-[#7D7268] mb-2">
-              Weight: <span className="font-medium text-[#2A2218]">{weightStr}</span>
+            <p className="font-body text-[12px] mb-2" style={{ color: "#7D7268" }}>
+              Weight: <span className="font-medium" style={{ color: "#7D7268" }}>{weightStr}</span>
             </p>
           )}
 
