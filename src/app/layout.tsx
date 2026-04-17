@@ -19,11 +19,19 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Plumpy Restaurant — Menu",
   description:
-    "Comfort food for everyday dine & delivery. View our full menu with nutrition info, allergens, and more.",
+    "Comfort food for everyday dine & delivery. Full menu with nutrition, allergens and more.",
+  icons: {
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "Plumpy Restaurant — Menu",
     description: "Comfort food for everyday dine & delivery.",
     type: "website",
+    images: ["/icon-512.png"],
   },
 };
 
